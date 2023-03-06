@@ -12,7 +12,7 @@ class ShoppingList extends StatefulWidget {
 }
 
 class _ShoppingListState extends State<ShoppingList> {
-  final checkBoxValues = Map<int, bool>();
+  final checkBoxValues = <int, bool>{};
 
   @override
   Widget build(BuildContext context) {

@@ -30,7 +30,7 @@ abstract class RecipeService extends ChopperService
     // 1
     final client = ChopperClient(
       // 2
-      baseUrl: apiUrl,
+      baseUrl: apiUrl as Uri,
       // 3
       interceptors: [_addQuery, HttpLoggingInterceptor()],
       // 4

@@ -2,11 +2,140 @@
 
 part of 'moor_db.dart';
 
-// **************************************************************************
-// MoorGenerator
-// **************************************************************************
+// ignore_for_file: type=lint
+class $MoorRecipeTable extends MoorRecipe
+    with TableInfo<$MoorRecipeTable, MoorRecipeData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $MoorRecipeTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _labelMeta = const VerificationMeta('label');
+  @override
+  late final GeneratedColumn<String> label = GeneratedColumn<String>(
+      'label', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _imageMeta = const VerificationMeta('image');
+  @override
+  late final GeneratedColumn<String> image = GeneratedColumn<String>(
+      'image', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _urlMeta = const VerificationMeta('url');
+  @override
+  late final GeneratedColumn<String> url = GeneratedColumn<String>(
+      'url', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _caloriesMeta =
+      const VerificationMeta('calories');
+  @override
+  late final GeneratedColumn<double> calories = GeneratedColumn<double>(
+      'calories', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _totalWeightMeta =
+      const VerificationMeta('totalWeight');
+  @override
+  late final GeneratedColumn<double> totalWeight = GeneratedColumn<double>(
+      'total_weight', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _totalTimeMeta =
+      const VerificationMeta('totalTime');
+  @override
+  late final GeneratedColumn<double> totalTime = GeneratedColumn<double>(
+      'total_time', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, label, image, url, calories, totalWeight, totalTime];
+  @override
+  String get aliasedName => _alias ?? 'moor_recipe';
+  @override
+  String get actualTableName => 'moor_recipe';
+  @override
+  VerificationContext validateIntegrity(Insertable<MoorRecipeData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('label')) {
+      context.handle(
+          _labelMeta, label.isAcceptableOrUnknown(data['label']!, _labelMeta));
+    } else if (isInserting) {
+      context.missing(_labelMeta);
+    }
+    if (data.containsKey('image')) {
+      context.handle(
+          _imageMeta, image.isAcceptableOrUnknown(data['image']!, _imageMeta));
+    } else if (isInserting) {
+      context.missing(_imageMeta);
+    }
+    if (data.containsKey('url')) {
+      context.handle(
+          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
+    } else if (isInserting) {
+      context.missing(_urlMeta);
+    }
+    if (data.containsKey('calories')) {
+      context.handle(_caloriesMeta,
+          calories.isAcceptableOrUnknown(data['calories']!, _caloriesMeta));
+    } else if (isInserting) {
+      context.missing(_caloriesMeta);
+    }
+    if (data.containsKey('total_weight')) {
+      context.handle(
+          _totalWeightMeta,
+          totalWeight.isAcceptableOrUnknown(
+              data['total_weight']!, _totalWeightMeta));
+    } else if (isInserting) {
+      context.missing(_totalWeightMeta);
+    }
+    if (data.containsKey('total_time')) {
+      context.handle(_totalTimeMeta,
+          totalTime.isAcceptableOrUnknown(data['total_time']!, _totalTimeMeta));
+    } else if (isInserting) {
+      context.missing(_totalTimeMeta);
+    }
+    return context;
+  }
 
-// ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  MoorRecipeData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MoorRecipeData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      label: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}label'])!,
+      image: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image'])!,
+      url: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
+      calories: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}calories'])!,
+      totalWeight: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}total_weight'])!,
+      totalTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}total_time'])!,
+    );
+  }
+
+  @override
+  $MoorRecipeTable createAlias(String alias) {
+    return $MoorRecipeTable(attachedDatabase, alias);
+  }
+}
+
 class MoorRecipeData extends DataClass implements Insertable<MoorRecipeData> {
   final int id;
   final String label;
@@ -15,7 +144,7 @@ class MoorRecipeData extends DataClass implements Insertable<MoorRecipeData> {
   final double calories;
   final double totalWeight;
   final double totalTime;
-  MoorRecipeData(
+  const MoorRecipeData(
       {required this.id,
       required this.label,
       required this.image,
@@ -23,27 +152,6 @@ class MoorRecipeData extends DataClass implements Insertable<MoorRecipeData> {
       required this.calories,
       required this.totalWeight,
       required this.totalTime});
-  factory MoorRecipeData.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
-      {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return MoorRecipeData(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      label: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}label'])!,
-      image: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}image'])!,
-      url: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}url'])!,
-      calories: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}calories'])!,
-      totalWeight: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}total_weight'])!,
-      totalTime: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}total_time'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -71,7 +179,7 @@ class MoorRecipeData extends DataClass implements Insertable<MoorRecipeData> {
 
   factory MoorRecipeData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
-    serializer ??= moorRuntimeOptions.defaultSerializer;
+    serializer ??= driftRuntimeOptions.defaultSerializer;
     return MoorRecipeData(
       id: serializer.fromJson<int>(json['id']),
       label: serializer.fromJson<String>(json['label']),
@@ -84,7 +192,7 @@ class MoorRecipeData extends DataClass implements Insertable<MoorRecipeData> {
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= moorRuntimeOptions.defaultSerializer;
+    serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'label': serializer.toJson<String>(label),
@@ -255,102 +363,68 @@ class MoorRecipeCompanion extends UpdateCompanion<MoorRecipeData> {
   }
 }
 
-class $MoorRecipeTable extends MoorRecipe
-    with TableInfo<$MoorRecipeTable, MoorRecipeData> {
+class $MoorIngredientTable extends MoorIngredient
+    with TableInfo<$MoorIngredientTable, MoorIngredientData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $MoorRecipeTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
+  $MoorIngredientTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: const IntType(),
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _labelMeta = const VerificationMeta('label');
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _recipeIdMeta =
+      const VerificationMeta('recipeId');
   @override
-  late final GeneratedColumn<String?> label = GeneratedColumn<String?>(
-      'label', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _imageMeta = const VerificationMeta('image');
+  late final GeneratedColumn<int> recipeId = GeneratedColumn<int>(
+      'recipe_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
-  late final GeneratedColumn<String?> image = GeneratedColumn<String?>(
-      'image', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _urlMeta = const VerificationMeta('url');
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _weightMeta = const VerificationMeta('weight');
   @override
-  late final GeneratedColumn<String?> url = GeneratedColumn<String?>(
-      'url', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _caloriesMeta = const VerificationMeta('calories');
+  late final GeneratedColumn<double> weight = GeneratedColumn<double>(
+      'weight', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
   @override
-  late final GeneratedColumn<double?> calories = GeneratedColumn<double?>(
-      'calories', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _totalWeightMeta =
-      const VerificationMeta('totalWeight');
+  List<GeneratedColumn> get $columns => [id, recipeId, name, weight];
   @override
-  late final GeneratedColumn<double?> totalWeight = GeneratedColumn<double?>(
-      'total_weight', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  final VerificationMeta _totalTimeMeta = const VerificationMeta('totalTime');
+  String get aliasedName => _alias ?? 'moor_ingredient';
   @override
-  late final GeneratedColumn<double?> totalTime = GeneratedColumn<double?>(
-      'total_time', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
+  String get actualTableName => 'moor_ingredient';
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, label, image, url, calories, totalWeight, totalTime];
-  @override
-  String get aliasedName => _alias ?? 'moor_recipe';
-  @override
-  String get actualTableName => 'moor_recipe';
-  @override
-  VerificationContext validateIntegrity(Insertable<MoorRecipeData> instance,
+  VerificationContext validateIntegrity(Insertable<MoorIngredientData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('label')) {
+    if (data.containsKey('recipe_id')) {
+      context.handle(_recipeIdMeta,
+          recipeId.isAcceptableOrUnknown(data['recipe_id']!, _recipeIdMeta));
+    } else if (isInserting) {
+      context.missing(_recipeIdMeta);
+    }
+    if (data.containsKey('name')) {
       context.handle(
-          _labelMeta, label.isAcceptableOrUnknown(data['label']!, _labelMeta));
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
-      context.missing(_labelMeta);
+      context.missing(_nameMeta);
     }
-    if (data.containsKey('image')) {
-      context.handle(
-          _imageMeta, image.isAcceptableOrUnknown(data['image']!, _imageMeta));
+    if (data.containsKey('weight')) {
+      context.handle(_weightMeta,
+          weight.isAcceptableOrUnknown(data['weight']!, _weightMeta));
     } else if (isInserting) {
-      context.missing(_imageMeta);
-    }
-    if (data.containsKey('url')) {
-      context.handle(
-          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
-    } else if (isInserting) {
-      context.missing(_urlMeta);
-    }
-    if (data.containsKey('calories')) {
-      context.handle(_caloriesMeta,
-          calories.isAcceptableOrUnknown(data['calories']!, _caloriesMeta));
-    } else if (isInserting) {
-      context.missing(_caloriesMeta);
-    }
-    if (data.containsKey('total_weight')) {
-      context.handle(
-          _totalWeightMeta,
-          totalWeight.isAcceptableOrUnknown(
-              data['total_weight']!, _totalWeightMeta));
-    } else if (isInserting) {
-      context.missing(_totalWeightMeta);
-    }
-    if (data.containsKey('total_time')) {
-      context.handle(_totalTimeMeta,
-          totalTime.isAcceptableOrUnknown(data['total_time']!, _totalTimeMeta));
-    } else if (isInserting) {
-      context.missing(_totalTimeMeta);
+      context.missing(_weightMeta);
     }
     return context;
   }
@@ -358,14 +432,23 @@ class $MoorRecipeTable extends MoorRecipe
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  MoorRecipeData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return MoorRecipeData.fromData(data, attachedDatabase,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  MoorIngredientData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return MoorIngredientData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      recipeId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}recipe_id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      weight: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}weight'])!,
+    );
   }
 
   @override
-  $MoorRecipeTable createAlias(String alias) {
-    return $MoorRecipeTable(attachedDatabase, alias);
+  $MoorIngredientTable createAlias(String alias) {
+    return $MoorIngredientTable(attachedDatabase, alias);
   }
 }
 
@@ -375,26 +458,11 @@ class MoorIngredientData extends DataClass
   final int recipeId;
   final String name;
   final double weight;
-  MoorIngredientData(
+  const MoorIngredientData(
       {required this.id,
       required this.recipeId,
       required this.name,
       required this.weight});
-  factory MoorIngredientData.fromData(
-      Map<String, dynamic> data, GeneratedDatabase db,
-      {String? prefix}) {
-    final effectivePrefix = prefix ?? '';
-    return MoorIngredientData(
-      id: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
-      recipeId: const IntType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}recipe_id'])!,
-      name: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
-      weight: const RealType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}weight'])!,
-    );
-  }
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -416,7 +484,7 @@ class MoorIngredientData extends DataClass
 
   factory MoorIngredientData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
-    serializer ??= moorRuntimeOptions.defaultSerializer;
+    serializer ??= driftRuntimeOptions.defaultSerializer;
     return MoorIngredientData(
       id: serializer.fromJson<int>(json['id']),
       recipeId: serializer.fromJson<int>(json['recipeId']),
@@ -426,7 +494,7 @@ class MoorIngredientData extends DataClass
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= moorRuntimeOptions.defaultSerializer;
+    serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'recipeId': serializer.toJson<int>(recipeId),
@@ -542,100 +610,20 @@ class MoorIngredientCompanion extends UpdateCompanion<MoorIngredientData> {
   }
 }
 
-class $MoorIngredientTable extends MoorIngredient
-    with TableInfo<$MoorIngredientTable, MoorIngredientData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $MoorIngredientTable(this.attachedDatabase, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
-      'id', aliasedName, false,
-      type: const IntType(),
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
-  final VerificationMeta _recipeIdMeta = const VerificationMeta('recipeId');
-  @override
-  late final GeneratedColumn<int?> recipeId = GeneratedColumn<int?>(
-      'recipe_id', aliasedName, false,
-      type: const IntType(), requiredDuringInsert: true);
-  final VerificationMeta _nameMeta = const VerificationMeta('name');
-  @override
-  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
-      'name', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
-  final VerificationMeta _weightMeta = const VerificationMeta('weight');
-  @override
-  late final GeneratedColumn<double?> weight = GeneratedColumn<double?>(
-      'weight', aliasedName, false,
-      type: const RealType(), requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [id, recipeId, name, weight];
-  @override
-  String get aliasedName => _alias ?? 'moor_ingredient';
-  @override
-  String get actualTableName => 'moor_ingredient';
-  @override
-  VerificationContext validateIntegrity(Insertable<MoorIngredientData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('recipe_id')) {
-      context.handle(_recipeIdMeta,
-          recipeId.isAcceptableOrUnknown(data['recipe_id']!, _recipeIdMeta));
-    } else if (isInserting) {
-      context.missing(_recipeIdMeta);
-    }
-    if (data.containsKey('name')) {
-      context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
-    } else if (isInserting) {
-      context.missing(_nameMeta);
-    }
-    if (data.containsKey('weight')) {
-      context.handle(_weightMeta,
-          weight.isAcceptableOrUnknown(data['weight']!, _weightMeta));
-    } else if (isInserting) {
-      context.missing(_weightMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  MoorIngredientData map(Map<String, dynamic> data, {String? tablePrefix}) {
-    return MoorIngredientData.fromData(data, attachedDatabase,
-        prefix: tablePrefix != null ? '$tablePrefix.' : null);
-  }
-
-  @override
-  $MoorIngredientTable createAlias(String alias) {
-    return $MoorIngredientTable(attachedDatabase, alias);
-  }
-}
-
 abstract class _$RecipeDatabase extends GeneratedDatabase {
-  _$RecipeDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+  _$RecipeDatabase(QueryExecutor e) : super(e);
   late final $MoorRecipeTable moorRecipe = $MoorRecipeTable(this);
   late final $MoorIngredientTable moorIngredient = $MoorIngredientTable(this);
   late final RecipeDao recipeDao = RecipeDao(this as RecipeDatabase);
   late final IngredientDao ingredientDao =
       IngredientDao(this as RecipeDatabase);
   @override
-  Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
+  Iterable<TableInfo<Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [moorRecipe, moorIngredient];
 }
-
-// **************************************************************************
-// DaoGenerator
-// **************************************************************************
 
 mixin _$RecipeDaoMixin on DatabaseAccessor<RecipeDatabase> {
   $MoorRecipeTable get moorRecipe => attachedDatabase.moorRecipe;

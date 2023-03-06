@@ -1,4 +1,5 @@
-import 'package:moor_flutter/moor_flutter.dart';
+import 'package:drift/drift.dart';
+import 'package:drift_sqflite/drift_sqflite.dart';
 import '../models/models.dart';
 part 'moor_db.g.dart';
 
@@ -31,12 +32,13 @@ class MoorIngredient extends Table {
 }
 
 // 1
-@UseMoor(tables: [MoorRecipe, MoorIngredient], daos: [RecipeDao, IngredientDao])
+@DriftDatabase(
+    tables: [MoorRecipe, MoorIngredient], daos: [RecipeDao, IngredientDao])
 // 2
 class RecipeDatabase extends _$RecipeDatabase {
   RecipeDatabase()
       // 3
-      : super(FlutterQueryExecutor.inDatabaseFolder(
+      : super(SqfliteQueryExecutor.inDatabaseFolder(
             path: 'recipes.sqlite', logStatements: true));
 
   // 4
@@ -45,7 +47,7 @@ class RecipeDatabase extends _$RecipeDatabase {
 }
 
 // 1
-@UseDao(tables: [MoorRecipe])
+@DriftAccessor(tables: [MoorRecipe])
 // 2
 class RecipeDao extends DatabaseAccessor<RecipeDatabase> with _$RecipeDaoMixin {
   // 3
@@ -97,7 +99,7 @@ class RecipeDao extends DatabaseAccessor<RecipeDatabase> with _$RecipeDaoMixin {
 }
 
 // 1
-@UseDao(tables: [MoorIngredient])
+@DriftAccessor(tables: [MoorIngredient])
 // 2
 class IngredientDao extends DatabaseAccessor<RecipeDatabase>
     with _$IngredientDaoMixin {
